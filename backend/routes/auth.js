@@ -1,7 +1,8 @@
 // Importing modules
 const express = require('express');
 const verifyjwt = require('../middleware/auth');
-const passportSetup = require('../utilities/oauth'); 
+const passport = require('passport');
+const passportSetup = require('../config/oauth'); 
 const {
     signup,
     login,
