@@ -8,12 +8,12 @@ const ChillSection = () => {
             <Box sx={{ m: 1 }}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
-                        <Paper sx={{ height: 500 }}>
-                            1
+                        <Paper sx={{ height: 500,backgroundColor: "#1A1A2E", color: "white" }}>
+                            
                         </Paper>
                     </Grid>
                     <Grid item xs={8}>
-                        <Paper>
+                        <Paper sx={{backgroundColor: "#16213E", color: "white",boxShadow : 0}}>
                         <Typography variant ="h5" sx={{px : 2, pt : 1}}>Memes</Typography>
                             <Grid container spacing={1}>
                                 <Grid item xs={12} ><CardSwiper /></Grid>

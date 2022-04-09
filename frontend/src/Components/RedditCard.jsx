@@ -7,7 +7,7 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 
 export default function RedditCard() {
   return (
-    <Card sx={{ width: 290, textAlign: "center" ,m : 2,boxShadow: "0"}}>
+    <Card sx={{ width: 290, textAlign: "center" ,m : 2,boxShadow: "0" , backgroundColor: "#1A1A2E", color: "white"}}>
         <CardMedia
           component="img"
           height="250"

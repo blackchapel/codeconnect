@@ -5,17 +5,16 @@ import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { textAlign } from "@mui/system";
-
+import Divider from "@mui/material/Divider";
+import ReadMoreIcon from '@mui/icons-material/ReadMore';
+import {useNavigate} from 'react-router-dom'
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -28,29 +27,42 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function BlogCard() {
+  const navigate=useNavigate();
   const [expanded, setExpanded] = React.useState(false);
+  const [flag, setFlag] = React.useState(true);
+  const handleClick = () => {
+    setFlag(!flag);
+  };
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
+  const readBlog =()=>{
+    navigate('/blog/kglksmsm')
+  }
+
   return (
-      <Card sx={{ maxWidth: 345, backgroundColor: "#1A1A2E", color: "white"}} >
+      <Card sx={{ maxWidth: 345, backgroundColor: "#1A1A2E", color: "white",borderRadius : 4}} >
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
               R
             </Avatar>
           }
-          title="Shrimp and Chorizo Paella"
+          title="Blogger Name"
         />
         <CardMedia
           component="img"
           height="194"
-          image="https://www.budgetbytes.com/wp-content/uploads/2013/07/Creamy-Tomato-Spinach-Pasta-close.jpg"
-          alt="Paella dish"
+          image="https://source.unsplash.com/random"
+          alt="NO Image found :("
         />
         <CardContent color="white">
+        <Typography variant="h5" color="white"sx={{mb :1}}>
+            Blog Title
+          </Typography>
+          <Divider sx={{backgroundColor: "#78909c" ,mx:0,mt : 2,mb : 2}} />
           <Typography variant="body2" color="white">
             This impressive paella is a perfect party dish and a fun meal to
             cook together with your guests. Add 1 cup of frozen peas along with
@@ -58,11 +70,11 @@ export default function BlogCard() {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites" sx={{color: "white"}}>
-            <FavoriteIcon />
+          <IconButton aria-label="add to favorites" sx={{color: "white"}} color={flag ? "primary" : "secondary"} onClick={handleClick}>
+            <FavoriteIcon   />
           </IconButton>
-          <IconButton aria-label="share" sx={{color: "white"}}>
-            <ShareIcon />
+          <IconButton aria-label="read more" sx={{color: "white"}} onClick={readBlog}>
+            <ReadMoreIcon />
           </IconButton>
         </CardActions>
       </Card>
