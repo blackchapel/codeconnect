@@ -7,7 +7,8 @@ const passportSetup = require('../config/oauth');
 const {
     createBlog,
     viewUserBlogs,
-    viewBlog
+    viewBlog,
+    view10Blogs
 } = require('../controllers/blog');
 
 // Initializing router
@@ -16,6 +17,7 @@ const router = new express.Router();
 router.post('/create', passport.authenticate('github'), createBlog);
 router.get('/all', viewUserBlogs);
 router.get('/:id', viewBlog);
+router.get('/random', view10Blogs);
 
 // Exporting Modules
 module.exports = router;

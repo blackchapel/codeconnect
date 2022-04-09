@@ -68,8 +68,35 @@ const viewBlog = async (req, res) => {
     }
 }
 
+const view10Blogs = async (req, res) => {
+    try {
+        const allBlogs = await Blog.find();
+        const tenBlogs = [];
+
+        if(!allBlogs) {
+            res.status(404).json({
+                message: 'Blogs not found!'
+            });
+            return;
+        }
+
+        for(let i = 0; i < 10; i++) {
+            tenBlogs[i] = allBlogs[i];
+        }
+
+        res.status(200).json({
+            data: tenBlogs
+        });
+    } catch (error) {
+        res.status(400).json({
+            message: error.message
+        });
+    }
+}
+
 module.exports = {
     createBlog,
     viewUserBlogs,
-    viewBlog
+    viewBlog,
+    view10Blogs
 };
