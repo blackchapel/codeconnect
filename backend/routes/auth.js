@@ -15,5 +15,14 @@ router.post('/signup', signup);
 router.post('/login', login);
 router.put('/logout', verifyjwt, logout);
 
+router.get('/github', passport.authenticate('github', {
+    scope: ['profile']
+}));
+
+router.get('/github/callback', passport.authenticate('github'), (req, res) => {
+    // res.send(req.user);
+    res.redirect('/');
+});
+
 // Exporting Modules
 module.exports = router;
