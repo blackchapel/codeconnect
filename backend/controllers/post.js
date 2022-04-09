@@ -4,9 +4,8 @@ const User = require('../models/user');
 
 const createPost = async (req, res) => {
     try {
-        const currentUser = await User.findById(req.body.userId);
         let newPost = new Post(req.body);
-        newPost.author = currentUser._id;
+        newPost.author = req.body.author;
         await newPost.save();
 
         res.status(201).json({

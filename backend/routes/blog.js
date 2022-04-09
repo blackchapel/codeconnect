@@ -14,7 +14,7 @@ const {
 // Initializing router
 const router = new express.Router();
 
-router.post('/create', passport.authenticate('github'), createBlog);
+router.post('/create', createBlog);
 router.get('/view/all', viewUserBlogs);
 router.get('/view/:id', viewBlog);
 router.get('/random', view10Blogs);
