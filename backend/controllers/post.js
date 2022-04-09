@@ -2,7 +2,25 @@
 const Post = require('../models/post');
 const User = require('../models/user');
 
-const viewUserPosts = async (req, res) =>  {
+const createPost = async (req, res) => {
+    try {
+        const currentUser = await User.findById(req.body.userId);
+        let newPost = new Post(req.body);
+        newPost.author = currentUser._id;
+        await newPost.save();
+
+        res.status(201).json({
+            message: 'Post created successfully!',
+            data: newPost
+        })
+    } catch (error) {
+        res.status(400).json({
+            message: error.message
+        });
+    }
+}
+
+const viewUserPosts = async (req, res) => {
     try {
         const currentUser = await User.findById(req.body.userId).populate('postsCreated');
         if (!currentUser) {
@@ -31,5 +49,6 @@ const viewUserPosts = async (req, res) =>  {
 }
 
 module.exports = {
+    createPost,
     viewUserPosts
 };

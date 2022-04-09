@@ -2,6 +2,24 @@
 const Blog = require('../models/blog');
 const User = require('../models/user');
 
+const createBlog = async (req, res) => {
+    try {
+        const currentUser = await User.findById(req.body.userId);
+        let newBlog = new Blog(req.body);
+        newBlog.author = currentUser._id;
+        await newBlog.save();
+
+        res.status(201).json({
+            message: 'Blog created successfully!',
+            data: createBlog
+        })
+    } catch (error) {
+        res.status(400).json({
+            message: error.message
+        });
+    }
+}
+
 const viewUserBlogs = async (req, res) => {
     try {
         const currentUser = await User.findById(req.body.userId).populate('blogsCreated');
@@ -51,6 +69,7 @@ const viewBlog = async (req, res) => {
 }
 
 module.exports = {
+    createBlog,
     viewUserBlogs,
     viewBlog
 };
