@@ -2,6 +2,7 @@ import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import RedditCard from "./RedditCard"
 import 'swiper/css';
+import { Typography } from '@mui/material';
 const CardSwiper = () => {
   return (
     <>
