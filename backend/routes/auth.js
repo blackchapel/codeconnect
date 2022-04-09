@@ -22,7 +22,9 @@ router.get('/github', passport.authenticate('github', {
 
 router.get('/github/callback', passport.authenticate('github'), (req, res) => {
     // res.send(req.user);
-    res.redirect('/');
+    res.status(200).json({
+        message: 'OAuth Successful'
+    });
 });
 
 // Exporting Modules
