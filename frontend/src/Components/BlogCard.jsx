@@ -27,6 +27,7 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function BlogCard() {
+  const navigate=useNavigate();
   const [expanded, setExpanded] = React.useState(false);
   const [flag, setFlag] = React.useState(true);
   const handleClick = () => {
@@ -38,7 +39,7 @@ export default function BlogCard() {
   };
 
   const readBlog =()=>{
-    navigate('/blog/:id')
+    navigate('/blog/kglksmsm')
   }
 
   return (
@@ -51,17 +52,17 @@ export default function BlogCard() {
           }
           title="Blogger Name"
         />
-          <Divider sx={{backgroundColor: "#78909c" ,mx:2,mb : 1}} />
-        {/* <CardMedia
+        <CardMedia
           component="img"
           height="194"
           image="https://source.unsplash.com/random"
           alt="NO Image found :("
-        /> */}
+        />
         <CardContent color="white">
         <Typography variant="h5" color="white"sx={{mb :1}}>
             Blog Title
           </Typography>
+          <Divider sx={{backgroundColor: "#78909c" ,mx:0,mt : 2,mb : 2}} />
           <Typography variant="body2" color="white">
             This impressive paella is a perfect party dish and a fun meal to
             cook together with your guests. Add 1 cup of frozen peas along with
