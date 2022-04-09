@@ -15,11 +15,14 @@ import MailIcon from "@mui/icons-material/Mail";
 import { Button } from "@mui/material";
 import BlogCard from "../Components/BlogCard";
 import { Grid } from "@mui/material";
+import ChillSection from "../Pages/ChillSection"
 const drawerWidth = 240;
 
 export default function Dashboard() {
   const [inbox, setInbox] = React.useState(false);
   const [starr, setStarr] = React.useState(false);
+  const [chill, setChill] = React.useState(false);
+
   React.useEffect(() => {
     setInbox(true);
   }, []);
@@ -50,20 +53,29 @@ export default function Dashboard() {
         <Toolbar />
         <Box sx={{ overflow: "auto" }}>
           <List>
-            {["Inbox", "Starred", "Send email", "Drafts"].map((t, index) => (
+            {["Inbox", "Starred", "Chill Section", "Drafts"].map((t, index) => (
               <ListItem button key={t} onClick={() => {
                 if (t === "Inbox") {
                   setInbox(true);
                   setStarr(false);
+                  setChill(false);
                 } else if (t === "Starred") {
                   setInbox(false);
                   setStarr(true);
+                  setChill(false);
+
+                }
+                else if (t === "Chill Section") {
+                  setInbox(false);
+                  setStarr(false);
+                  setChill(true);
+
                 }
               }}>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={t} />
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={t} />
               </ListItem>
             ))}
           </List>
@@ -105,6 +117,8 @@ export default function Dashboard() {
           </Grid>
         )}
         {starr && <p>This is starred</p>}
+
+        {chill && <ChillSection/>}
       </Box>
     </Box>
   );

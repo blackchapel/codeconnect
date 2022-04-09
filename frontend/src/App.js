@@ -30,7 +30,7 @@ function App() {
   });
   return (
     <>
-     <Spotify /> 
+     {/* <Spotify />  */}
       <ThemeProvider theme={theme}>
         <AnimatePresence exitBeforeEnter>
             <Routes location={loc} key={loc.key}>
