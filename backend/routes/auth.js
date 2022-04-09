@@ -21,10 +21,7 @@ router.get('/github', passport.authenticate('github', {
 }));
 
 router.get('/github/callback', passport.authenticate('github'), (req, res) => {
-    // res.send(req.user);
-    res.status(200).json({
-        message: 'OAuth Successful'
-    });
+    res.redirect('http://localhost:3000/dash');
 });
 
 // Exporting Modules
