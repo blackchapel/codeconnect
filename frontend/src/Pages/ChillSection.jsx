@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Box, Paper, Typography } from "@mui/material";
+import { Grid, Box, Paper, Typography, Image } from "@mui/material";
 import Spotify from "../Components/Spotify";
 import CardSwiper from "../Components/CardSwiper";
 
@@ -10,8 +10,9 @@ const ChillSection = () => {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Paper
-              sx={{height: "500px", backgroundColor: "#1A1A2E", color: "white", borderRadius: "20px" }}
+              sx={{backgroundColor: "#1A1A2E", color: "white", borderRadius: "20px" }}
             >
+                <img alt="chill section" src="https://media.giphy.com/media/YGV1S4MpyywBbIfc4Y/giphy.gif" height="570px" width="100%"/>
             </Paper>
           </Grid>
           <Grid item xs={8}>
