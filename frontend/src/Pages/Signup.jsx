@@ -25,16 +25,18 @@ export default function SignInSide() {
   })
 
   const getData = async () => {
-    const userData = { name, email, password, password2 }
+    const userData = { name, email, password }
     const response = await axios.post('http://localhost:3001/api/auth/signup', userData)
-
     console.log(response);
-
-    return response.data.data
+    localStorage.setItem('user',JSON.stringify(response.data.data.newUser))
+    localStorage.setItem('user_id',JSON.stringify(response.data.data.newUser.user_id))
+    localStorage.setItem('user_blogs',JSON.stringify(response.data.data.newUser.blogsCreated))
+    localStorage.setItem('user_posts',JSON.stringify(response.data.data.newUser.postsCreated))
+    return response.data
 
   }
 
-  const { name, email,  password, password2 } = formData
+  const { name, email, password } = formData
 
   const onChange = (e) => {
 
@@ -52,7 +54,7 @@ export default function SignInSide() {
     getData();
   }
 
-  useEffect(() => { getData() })
+  useEffect(() => { getData() },[])
 
 
   return (
