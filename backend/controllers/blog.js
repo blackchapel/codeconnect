@@ -73,7 +73,7 @@ const view10Blogs = async (req, res) => {
         const allBlogs = await Blog.find();
         const tenBlogs = [];
 
-        if(!allBlogs) {
+        if(allBlogs.length == 0) {
             res.status(404).json({
                 message: 'Blogs not found!'
             });

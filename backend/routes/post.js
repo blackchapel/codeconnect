@@ -13,7 +13,7 @@ const {
 const router = new express.Router();
 
 router.post('/create', passport.authenticate('github'), createPost);
-router.get('/all', viewUserPosts);
+router.get('/view/all', viewUserPosts);
 router.get('/random', view10Posts);
 
 // Exporting Modules
