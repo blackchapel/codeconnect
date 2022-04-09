@@ -12,7 +12,7 @@ const Spotify = () => {
 
     return (
         <>
-            <iframe title="My Daily Marathon Tracker" src="https://open.spotify.com/embed/playlist/37i9dQZF1DWWQRwui0ExPn?utm_source=generator" width="100%" height="500" style={{ borderRadius: 10 }} frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+            <iframe title="My Daily Marathon Tracker" src="https://open.spotify.com/embed/playlist/37i9dQZF1DWWQRwui0ExPn?utm_source=generator" width="100%" height="733" style={{ borderRadius: 10 }} frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 
 
         </>

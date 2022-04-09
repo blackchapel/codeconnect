@@ -25,7 +25,7 @@ export default function SignInSide() {
 
   const getData = async () => {
     const userData = { username, password }
-    const response = await axios.post('http://localhost:5001/api/auth/login', userData)
+    const response = await axios.post('http://localhost:3001/api/auth/login', userData)
 
     console.log(response.data);
     localStorage.setItem('token', response.data.token)
