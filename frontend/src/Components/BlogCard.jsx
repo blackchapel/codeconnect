@@ -35,7 +35,7 @@ export default function BlogCard() {
   };
 
   return (
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 345, backgroundColor: "#1A1A2E", color: "white"}} >
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -43,7 +43,6 @@ export default function BlogCard() {
             </Avatar>
           }
           title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2016"
         />
         <CardMedia
           component="img"
@@ -51,18 +50,18 @@ export default function BlogCard() {
           image="https://www.budgetbytes.com/wp-content/uploads/2013/07/Creamy-Tomato-Spinach-Pasta-close.jpg"
           alt="Paella dish"
         />
-        <CardContent>
-          <Typography variant="body2" color="text.secondary">
+        <CardContent color="white">
+          <Typography variant="body2" color="white">
             This impressive paella is a perfect party dish and a fun meal to
             cook together with your guests. Add 1 cup of frozen peas along with
             the mussels, if you like.
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
+          <IconButton aria-label="add to favorites" sx={{color: "white"}}>
             <FavoriteIcon />
           </IconButton>
-          <IconButton aria-label="share">
+          <IconButton aria-label="share" sx={{color: "white"}}>
             <ShareIcon />
           </IconButton>
         </CardActions>
