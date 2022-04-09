@@ -9,8 +9,8 @@ const {
 // Initializing router
 const router = new express.Router();
 
-router.get('/blog/all', viewUserBlogs);
-router.get('/blog/:id', viewBlog);
+router.get('/all', viewUserBlogs);
+router.get('/:id', viewBlog);
 
 // Exporting Modules
 module.exports = router;
