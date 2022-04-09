@@ -41,20 +41,16 @@ const style = {
 };
 
 export default function BlogCard() {
-
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
   const blogData=JSON.parse( localStorage.getItem( 'user_blogs' ) );
   const navigate=useNavigate();
   const [expanded, setExpanded] = React.useState(false);
-
   const [flag, setFlag] = React.useState(true);
   const handleClick = () => {
     setFlag(!flag);
   };
-
 
   return (
     <Card
@@ -128,45 +124,5 @@ export default function BlogCard() {
         </Modal>
       </CardActions>
     </Card>
-
-
-console.log(blogData)
-  return (
-      <Card sx={{ maxWidth: 345, backgroundColor: "#1A1A2E", color: "white",borderRadius : 4}} >
-        <CardHeader
-          avatar={
-            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              R
-            </Avatar>
-          }
-          title="Blogger Name"
-        />
-        <CardMedia
-          component="img"
-          height="194"
-          image="https://source.unsplash.com/random"
-          alt="NO Image found :("
-        />
-        <CardContent color="white">
-        <Typography variant="h5" color="white"sx={{mb :1}}>
-            Blog Title
-          </Typography>
-          <Divider sx={{backgroundColor: "#78909c" ,mx:0,mt : 2,mb : 2}} />
-          <Typography variant="body2" color="white">
-            This impressive paella is a perfect party dish and a fun meal to
-            cook together with your guests. Add 1 cup of frozen peas along with
-            the mussels, if you like.
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites" sx={{color: "white"}} color={flag ? "primary" : "secondary"} onClick={handleClick}>
-            <FavoriteIcon   />
-          </IconButton>
-          <IconButton aria-label="read more" sx={{color: "white"}}>
-            <ReadMoreIcon />
-          </IconButton>
-        </CardActions>
-      </Card>
-
   );
 }
