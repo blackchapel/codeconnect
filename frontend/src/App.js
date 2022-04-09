@@ -9,6 +9,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AnimatePresence } from "framer-motion";
 import Home from "./Pages/Home"
 import { useLocation } from "react-router-dom";
+import Dashboard from "./Pages/Dashboard";
 
 function App() {
   const loc = useLocation();
@@ -34,9 +35,9 @@ function App() {
         <AnimatePresence exitBeforeEnter>
             <Routes location={loc} key={loc.key}>
               <Route path="/login" element={<Login />}></Route>
+              <Route path="/dash" element={<Dashboard />}></Route>
               <Route path="/signup" element={<Signup />}></Route>
               <Route path="/home" element={<Home />}></Route>
-
             </Routes>
         </AnimatePresence>
       </ThemeProvider>
