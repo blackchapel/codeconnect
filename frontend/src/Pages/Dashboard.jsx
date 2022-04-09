@@ -13,6 +13,7 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { Button } from "@mui/material";
+import LogoutIcon from '@mui/icons-material/Logout';
 import BlogCard from "../Components/BlogCard";
 import { Grid } from "@mui/material";
 import ChillSection from "../Pages/ChillSection";
@@ -21,6 +22,8 @@ import { Backdrop } from "@mui/material";
 import { Modal } from "@mui/material";
 import { FaEdit } from "react-icons/fa";
 import { FormControl, TextField } from "@mui/material";
+import PostCard from '../Components/PostCard'
+import axios from 'axios'
 const drawerWidth = 240;
 const style = {
   position: "absolute",
@@ -39,6 +42,7 @@ export default function Dashboard() {
   const [formData, setFormData] = React.useState({
     Heading: '',
     Content: '',
+    Author : JSON.parse( localStorage.getItem( 'user_id' ))
   })
   const [inbox, setInbox] = React.useState(false);
   const [starr, setStarr] = React.useState(false);
@@ -58,11 +62,12 @@ export default function Dashboard() {
 
     }))
   }
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     console.log(formData);
     e.preventDefault();
+    const response = await axios.post('http://localhost:3001/api/blog/create',formData)
+    console.log(response);
     setOpen(false)
-
   }
   return (
     <Box
@@ -74,9 +79,10 @@ export default function Dashboard() {
         sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap component="div">
+          <Typography variant="h6" noWrap component="div" sx={{flexGrow : 1}}>
             Clipped drawer
           </Typography>
+        <Button variant="contained" startIcon={<LogoutIcon/>}color='secondary' >Logout</Button>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -214,13 +220,13 @@ export default function Dashboard() {
                   <BlogCard />
                 </Grid>
                 <Grid item>
-                  <BlogCard />
+                  <BlogCard/>
                 </Grid>
                 <Grid item>
                   <BlogCard />
                 </Grid>
                 <Grid item>
-                  <BlogCard />
+                  <PostCard />
                 </Grid>
               </Grid>
             </Grid>
