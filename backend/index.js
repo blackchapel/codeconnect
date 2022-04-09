@@ -31,9 +31,13 @@ app.use(morgan('dev'));
 
 // Importing Routes
 const auth = require('./routes/auth');
+const blog = require('./routes/blog');
+const post = require('./routes/post');
 
 // Routes
 app.use('/api/auth', auth);
+app.use('/api/blog', blog);
+app.use('/api/post', post);
 
 app.get('/api', (req, res) => {
     res.json({ message: "Hello from server!" });

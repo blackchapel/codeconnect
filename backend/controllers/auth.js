@@ -17,6 +17,8 @@ const signup = async (req, res) => {
                 newUser
             },
         });
+
+        res.redirect('http:localhost:3000/dash');
     } catch (error) {
         res.status(400).json({
             message: error.message
