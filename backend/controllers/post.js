@@ -48,7 +48,34 @@ const viewUserPosts = async (req, res) => {
     }
 }
 
+const view10Posts = async (req, res) => {
+    try {
+        const allPosts = await Post.find();
+        const tenPosts = [];
+
+        if(!allPosts) {
+            res.status(404).json({
+                message: 'Posts not found!'
+            });
+            return;
+        }
+
+        for(let i = 0; i < 10; i++) {
+            tenPosts[i] = allPosts[i];
+        }
+
+        res.status(200).json({
+            data: tenPosts
+        });
+    } catch (error) {
+        res.status(400).json({
+            message: error.message
+        });
+    }
+}
+
 module.exports = {
     createPost,
-    viewUserPosts
+    viewUserPosts,
+    view10Posts
 };
