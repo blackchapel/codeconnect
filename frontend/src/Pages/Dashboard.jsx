@@ -18,10 +18,40 @@ import { Grid } from "@mui/material";
 import ChillSection from "../Pages/ChillSection";
 import LogoutIcon from '@mui/icons-material/Logout';
 import { GlobalStyles } from "@mui/material";
+
+import { Backdrop } from "@mui/material";
+import { Modal } from "@mui/material";
+import { FaEdit } from "react-icons/fa";
+import { FormControl, TextField } from "@mui/material";
+
 import {useNavigate} from "react-router-dom"
 const drawerWidth = 240;
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+  borderRadius: 4,
+};
 
 export default function Dashboard() {
+
+  const [formData, setFormData] = React.useState({
+    Heading: '',
+    Content: '',
+  })
+  const [inbox, setInbox] = React.useState(false);
+  const [starr, setStarr] = React.useState(false);
+  const [chill, setChill] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const navigate=useNavigate()
   const [inbox, setInbox] = React.useState(false);
   const [starr, setStarr] = React.useState(false);
@@ -34,10 +64,48 @@ export default function Dashboard() {
     localStorage.removeItem('user_id')
     navigate('/')
   }
+
   React.useEffect(() => {
     setInbox(true);
   }, []);
+  const onChange = (e) => {
+
+    setFormData((prevState) => ({
+
+      ...prevState,
+      [e.target.name]: e.target.value,
+
+    }))
+  }
+  const handleSubmit = (e) => {
+    console.log(formData);
+    e.preventDefault();
+    setOpen(false)
+
+  }
   return (
+
+    <Box
+      sx={{ display: "flex", backgroundColor: "#16213E", margin: "0" }}
+      color="secondary"
+    >
+      <AppBar
+        position="fixed"
+        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      >
+        <Toolbar>
+          <Typography variant="h6" noWrap component="div">
+            Clipped drawer
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        variant="permanent"
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          [`& .MuiDrawer-paper`]: {
+
       <Box
         sx={{ display: "flex", backgroundColor: "#16213E", margin: "0", }}
         color="secondary"
@@ -57,82 +125,151 @@ export default function Dashboard() {
         <Drawer
           variant="permanent"
           sx={{
+
             width: drawerWidth,
-            flexShrink: 0,
-            [`& .MuiDrawer-paper`]: {
-              width: drawerWidth,
-              boxSizing: "border-box",
-              borderWidth: 0,
-            },
-            backgroundColor: "#1A1A2E",
-          }}
+            boxSizing: "border-box",
+            borderWidth: 0,
+            height: "40%",
+          },
+          backgroundColor: "#1A1A2E",
+        }}
+      >
+        <Toolbar sx={{ backgroundColor: "#1A1A2E" }} />
+        <Box
+          sx={{ overflow: "auto", backgroundColor: "#1A1A2E", height: "100%" }}
+          color="secondary"
         >
-          <Toolbar sx={{ backgroundColor: "#1A1A2E" }} />
-          <Box
-            sx={{ overflow: "auto", backgroundColor: "#1A1A2E", height: "100%" }}
-            color="secondary"
+          <List color="secondary" sx={{ backgroundColor: "#1A1A2E" }}>
+            {["Inbox", "Starred", "Chill Section", "Drafts"].map((t, index) => (
+              <ListItem
+                color="secondary"
+                button
+                key={t}
+                onClick={() => {
+                  if (t === "Inbox") {
+                    setInbox(true);
+                    setStarr(false);
+                    setChill(false);
+                  } else if (t === "Starred") {
+                    setInbox(false);
+                    setStarr(true);
+                    setChill(false);
+                  } else if (t === "Chill Section") {
+                    setInbox(false);
+                    setStarr(false);
+                    setChill(true);
+                  }
+                }}
+              >
+                <ListItemIcon sx={{ color: "#E94560" }}>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={t} sx={{ color: "white" }} />
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      </Drawer>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Toolbar />
+        {inbox && (
+          <Grid
+            container
+            direction="column"
+            justifyContent="flex-start"
+            alignItems="center"
           >
-            <List color="secondary" sx={{ backgroundColor: "#1A1A2E" }}>
-              {["Inbox", "Starred", "Chill Section", "Drafts"].map(
-                (t, index) => (
-                  <ListItem
+            <Grid item>
+              <Button onClick={handleOpen}>
+                <Grid
+                  container
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="flex-start"
+                  spacing={1}
+                >
+                  <Grid item sx={{ fontSize: "40px", color: "#E94560" }}>
+                    <FaEdit />
+                  </Grid>
+                  <Grid item sx={{ color: "#E94560" }}>
+                    <h4>Write a Blog</h4>
+                  </Grid>
+                </Grid>
+              </Button>
+              <Modal
+                aria-labelledby="spring-modal-title"
+                aria-describedby="spring-modal-description"
+                open={open}
+                onClose={handleClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                  timeout: 500,
+                }}
+              >
+                <Box sx={style} component="form" noValidate>
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="Heading"
+                    label="Heading"
+                    name="Heading"
+                    onChange={onChange}
+                    autoComplete="Heading"
+                    autoFocus
+                  />
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="Content"
+                    label="Content"
+                    type="Content"
+                    onChange={onChange}
+                    id="Content"
+                    autoComplete="current-password"
+                  />
+                  <Button
+                    type="submit"
+                    fullWidth
                     color="secondary"
-                    button
-                    key={t}
-                    onClick={() => {
-                      if (t === "Inbox") {
-                        setInbox(true);
-                        setStarr(false);
-                        setChill(false);
-                      } else if (t === "Starred") {
-                        setInbox(false);
-                        setStarr(true);
-                        setChill(false);
-                      } else if (t === "Chill Section") {
-                        setInbox(false);
-                        setStarr(false);
-                        setChill(true);
-                      }
-                    }}
+                    variant="contained"
+                    onClick={handleSubmit}
+                    sx={{ mt: 3, mb: 2, boxShadow: 0, color: "white" }}
                   >
-                    <ListItemIcon sx={{ color: "#E94560" }}>
-                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                    </ListItemIcon>
-                    <ListItemText primary={t} sx={{ color: "white" }} />
-                  </ListItem>
-                )
-              )}
-            </List>
-          </Box>
-        </Drawer>
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <Toolbar />
-          {inbox && (
-            <Grid
-              container
-              direction="row"
-              justifyContent="center"
-              alignItems="flex-start"
-              spacing={2}
-            >
-              <Grid item>
-                <BlogCard />
-              </Grid>
-              <Grid item>
-                <BlogCard />
-              </Grid>
-              <Grid item>
-                <BlogCard />
-              </Grid>
-              <Grid item>
-                <BlogCard />
+                    Submit
+                  </Button>
+                </Box>
+              </Modal>
+            </Grid>
+            <Grid item>
+              <Grid
+                container
+                direction="row"
+                justifyContent="center"
+                alignItems="flex-start"
+                spacing={2}
+              >
+                <Grid item>
+                  <BlogCard />
+                </Grid>
+                <Grid item>
+                  <BlogCard />
+                </Grid>
+                <Grid item>
+                  <BlogCard />
+                </Grid>
+                <Grid item>
+                  <BlogCard />
+                </Grid>
               </Grid>
             </Grid>
-          )}
-          {starr && <p>This is starred</p>}
-
-          {chill && <ChillSection />}
-        </Box>
+          </Grid>
+        )}
+        {starr && <p>This is starred</p>}
+        {chill && <ChillSection />}
       </Box>
+    </Box>
   );
 }
