@@ -14,25 +14,27 @@ import axios from "axios"
 import Divider from "@mui/material/Divider";
 import Chip from "@mui/material/Chip";
 import GHButton from '../Components/GHButton'
+import { useCookies } from 'react-cookie';
 export default function SignInSide() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   })
 
-  // const [token, setToken] = useState()
+  const [cookies, setCookie] = useCookies(['user']);
   const navigate = useNavigate()
 
   const getData = async () => {
     const userData = { email, password }
     const response = await axios.post('http://localhost:3001/api/auth/login', userData)
-
-    console.log(response.data);
-    // localStorage.setItem('token', response.data.token)
+    console.log(response);
+    setCookie(response.data.data.token)
+    localStorage.setItem('user',JSON.stringify(response.data.data.user))
+    localStorage.setItem('user_id',JSON.stringify(response.data.data.user._id))
+    localStorage.setItem('user_blogs',JSON.stringify(response.data.data.user.blogsCreated))
+    localStorage.setItem('user_posts',JSON.stringify(response.data.data.user.postsCreated))
     return response.data
-
   }
-  // console.log(token);
   const { email, password } = formData
 
   const onChange = (e) => {
