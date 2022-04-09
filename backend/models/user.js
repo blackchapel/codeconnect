@@ -44,6 +44,10 @@ const userSchema = new mongoose.Schema (
             trim: true
         },
 
+        displayPicture: {
+            type: String
+        },
+
         postsCreated: [{
             type: [mongoose.Schema.Types.ObjectId],
             ref: 'Post'
