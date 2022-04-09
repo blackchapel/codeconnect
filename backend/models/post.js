@@ -28,4 +28,4 @@ const postSchema = new mongoose.Schema(
 const Post = mongoose.model('Post', postSchema);
 
 // Exporting modules
-module.exports = Blog;
+module.exports = Post;
