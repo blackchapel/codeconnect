@@ -1,10 +1,13 @@
 import React from "react";
 import Video from "../Videos/Pexels Videos 2759484.mp4"
 import { AppBar, Typography, Button, Toolbar, Box, Grid, Paper } from "@mui/material"
+import BlogCardSwiper from "../Components/BlogCardSwiper"
+import {useNavigate} from 'react-router-dom'
 function Landing() {
+    const navigate = useNavigate();
     return (
         <>
-            {/* <video
+            <video
         autoPlay
         loop
         muted
@@ -20,20 +23,38 @@ function Landing() {
         }}
       >
         <source src={Video} type="video/mp4" />
-      </video> */}
+      </video>
 
-                <AppBar sx={{ boxShadow: 0  , zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+            <Box sx={{ display: "flex", flexDirection: "column", margin: "0", }}
+                color="secondary">
+                <AppBar position="static" sx={{ boxShadow: 0}}>
                     <Toolbar>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                             CodeConnect
                         </Typography>
-                        <Button color="secondary" variant="outlined" sx={{ mx: 2 }}>Sign up</Button>
-                        <Button color="secondary" variant="contained">Login</Button>
+                        <Button color="secondary" variant="outlined" sx={{ mx: 2 }} onClick={()=>{navigate('/signup')}}>Sign up</Button>
+                        <Button color="secondary" variant="contained" onClick={()=>{navigate('/login')}} >Login</Button>
                     </Toolbar>
                 </AppBar>
-                <Paper>1</Paper>
-     
-            sdjfkfjslkfj
+                <Box sx={{m : 2}}>
+                    <Grid container spacing={2}>
+                    <Grid item xs={8}>
+                            <Paper sx={{height : 250}}>8</Paper>
+                        </Grid><Grid item xs={4}>
+                            <Paper sx={{height : 250,backgroundColor :'red'}}>4</Paper>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Paper sx={{backgroundColor: 'transparent',boxShadow : 0}}>
+                                <Typography variant="h4" sx={{color : 'white'}}>Blogs</Typography>
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <BlogCardSwiper/>
+                        </Grid>
+                    </Grid>
+                </Box>
+            </Box>
+
         </>
     );
 }
