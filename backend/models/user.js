@@ -11,13 +11,16 @@ const userSchema = new mongoose.Schema (
     {
         name: {
             type: String,
-            required: true,
             trim: true
+        },
+
+        username: {
+            type: String, 
+            trim :true
         },
 
         email: {
             type: String,
-            required: true,
             trim: true,
             unique: true,
             lowercase: true,
@@ -26,10 +29,19 @@ const userSchema = new mongoose.Schema (
 
         password: {
             type: String,
-            required: true,
             trim: true,
             minlength: [8, 'Password too short!'],
             maxlength: [128, 'Password too long!']
+        },
+
+        githubId: {
+            type: String,
+            trim: true
+        },
+
+        githubAccessToken: {
+            type: String,
+            trim: true
         },
 
         postsCreated: [{
