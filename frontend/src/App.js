@@ -10,6 +10,7 @@ import { AnimatePresence } from "framer-motion";
 import Home from "./Pages/Home"
 import { useLocation } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard";
+
 function App() {
   const loc = useLocation();
   const theme = createTheme({

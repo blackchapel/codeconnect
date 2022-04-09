@@ -13,6 +13,8 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { Button } from "@mui/material";
+import BlogCard from "../Components/BlogCard";
+import { Grid } from "@mui/material";
 const drawerWidth = 240;
 
 export default function Dashboard() {
@@ -49,24 +51,19 @@ export default function Dashboard() {
         <Box sx={{ overflow: "auto" }}>
           <List>
             {["Inbox", "Starred", "Send email", "Drafts"].map((t, index) => (
-              <ListItem key={t}>
-                <Button
-                  onClick={() => {
-                    if (t === "Inbox") {
-                      setInbox(true);
-                      setStarr(false);
-                    }
-                    else if (t === "Starred") {
-                      setInbox(false);
-                      setStarr(true);
-                    }
-                  }}
-                >
+              <ListItem button key={t} onClick={() => {
+                if (t === "Inbox") {
+                  setInbox(true);
+                  setStarr(false);
+                } else if (t === "Starred") {
+                  setInbox(false);
+                  setStarr(true);
+                }
+              }}>
                   <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                   </ListItemIcon>
                   <ListItemText primary={t} />
-                </Button>
               </ListItem>
             ))}
           </List>
@@ -85,7 +82,28 @@ export default function Dashboard() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        {inbox && <p>This is inbox</p>}
+        {inbox && (
+          <Grid
+            container
+            direction="row"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+            spacing={2}
+          >
+            <Grid item>
+              <BlogCard />
+            </Grid>
+            <Grid item>
+              <BlogCard />
+            </Grid>
+            <Grid item>
+              <BlogCard />
+            </Grid>
+            <Grid item>
+              <BlogCard />
+            </Grid>
+          </Grid>
+        )}
         {starr && <p>This is starred</p>}
       </Box>
     </Box>
