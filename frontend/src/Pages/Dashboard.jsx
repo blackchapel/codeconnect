@@ -16,11 +16,15 @@ import { Button } from "@mui/material";
 import BlogCard from "../Components/BlogCard";
 import { Grid } from "@mui/material";
 import ChillSection from "../Pages/ChillSection";
+import LogoutIcon from '@mui/icons-material/Logout';
 import { GlobalStyles } from "@mui/material";
+
 import { Backdrop } from "@mui/material";
 import { Modal } from "@mui/material";
 import { FaEdit } from "react-icons/fa";
 import { FormControl, TextField } from "@mui/material";
+
+import {useNavigate} from "react-router-dom"
 const drawerWidth = 240;
 const style = {
   position: "absolute",
@@ -36,6 +40,7 @@ const style = {
 };
 
 export default function Dashboard() {
+
   const [formData, setFormData] = React.useState({
     Heading: '',
     Content: '',
@@ -46,6 +51,20 @@ export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const navigate=useNavigate()
+  const [inbox, setInbox] = React.useState(false);
+  const [starr, setStarr] = React.useState(false);
+  const [chill, setChill] = React.useState(false);
+
+  const handleLogout=()=>{
+    localStorage.removeItem('user')
+    localStorage.removeItem('user_blogs')
+    localStorage.removeItem('user_posts')
+    localStorage.removeItem('user_id')
+    navigate('/')
+  }
+
   React.useEffect(() => {
     setInbox(true);
   }, []);
@@ -65,6 +84,7 @@ export default function Dashboard() {
 
   }
   return (
+
     <Box
       sx={{ display: "flex", backgroundColor: "#16213E", margin: "0" }}
       color="secondary"
@@ -85,6 +105,27 @@ export default function Dashboard() {
           width: drawerWidth,
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: {
+
+      <Box
+        sx={{ display: "flex", backgroundColor: "#16213E", margin: "0", }}
+        color="secondary"
+      >
+        <AppBar
+          position="fixed"
+          sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+   
+        >
+          <Toolbar>
+            <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+              Clipped drawer
+            </Typography>
+            <Button variant='contained' color='secondary' onClick={handleLogout} startIcon={<LogoutIcon/>}>LOGOUT</Button>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          variant="permanent"
+          sx={{
+
             width: drawerWidth,
             boxSizing: "border-box",
             borderWidth: 0,
