@@ -29,9 +29,9 @@ function App() {
   });
   return (
     <>
+     <Spotify /> 
       <ThemeProvider theme={theme}>
         <AnimatePresence exitBeforeEnter>
-          {/* <Spotify /> */}
             <Routes location={loc} key={loc.key}>
               <Route path="/login" element={<Login />}></Route>
               <Route path="/signup" element={<Signup />}></Route>
