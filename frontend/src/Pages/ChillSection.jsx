@@ -14,7 +14,7 @@ const ChillSection = () => {
                     </Grid>
                     <Grid item xs={8}>
                         <Paper>
-                        <Typography>Memes</Typography>
+                        <Typography variant ="h5" sx={{px : 2, pt : 1}}>Memes</Typography>
                             <Grid container spacing={1}>
                                 <Grid item xs={12} ><CardSwiper /></Grid>
                                 <Grid item xs={12} ><CardSwiper /></Grid>
