@@ -17,18 +17,16 @@ import GHButton from '../Components/GHButton'
 export default function SignInSide() {
 
   const [formData, setFormData] = useState({
-    first_name: '',
-    last_name: '',
+    name: '',
     email: '',
-    phone_number: '',
     password: '',
     password2: '',
 
   })
 
   const getData = async () => {
-    const userData = { first_name, last_name, email, phone_number, password, password2 }
-    const response = await axios.post('http://localhost:5001/api/auth/signup', userData)
+    const userData = { name, email, password, password2 }
+    const response = await axios.post('http://localhost:3001/api/auth/signup', userData)
 
     console.log(response);
 
@@ -36,7 +34,7 @@ export default function SignInSide() {
 
   }
 
-  const { first_name, last_name, email, phone_number, password, password2 } = formData
+  const { name, email,  password, password2 } = formData
 
   const onChange = (e) => {
 
@@ -126,9 +124,9 @@ export default function SignInSide() {
                     margin="normal"
                     required
                     fullWidth
-                    id="fname"
+                    id="name"
                     label=" Name"
-                    name="first_name"
+                    name="name"
                     onChange={onChange}
                     autoFocus
                   />

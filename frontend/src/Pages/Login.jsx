@@ -16,24 +16,24 @@ import Chip from "@mui/material/Chip";
 import GHButton from '../Components/GHButton'
 export default function SignInSide() {
   const [formData, setFormData] = useState({
-    username: '',
+    email: '',
     password: '',
   })
 
-  const [token, setToken] = useState()
+  // const [token, setToken] = useState()
   const navigate = useNavigate()
 
   const getData = async () => {
-    const userData = { username, password }
-    const response = await axios.post('http://localhost:5001/api/auth/login', userData)
+    const userData = { email, password }
+    const response = await axios.post('http://localhost:3001/api/auth/login', userData)
 
     console.log(response.data);
-    localStorage.setItem('token', response.data.token)
+    // localStorage.setItem('token', response.data.token)
     return response.data
 
   }
-  console.log(token);
-  const { username, password } = formData
+  // console.log(token);
+  const { email, password } = formData
 
   const onChange = (e) => {
 
@@ -49,7 +49,7 @@ export default function SignInSide() {
     console.log(formData);
     e.preventDefault()
     getData();
-    navigate('/smform')
+    navigate('/dash')
 
   }
 
@@ -125,7 +125,7 @@ export default function SignInSide() {
                 fullWidth
                 id="email"
                 label="Email Address"
-                name="username"
+                name="email"
                 onChange={onChange}
                 autoComplete="email"
                 autoFocus
