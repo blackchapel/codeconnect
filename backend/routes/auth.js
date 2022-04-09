@@ -21,8 +21,12 @@ router.get('/github', passport.authenticate('github', {
 }));
 
 router.get('/github/callback', passport.authenticate('github'), (req, res) => {
+    res.redirect('http://localhost:3000/dash');
+});
+
+router.get('/user/view', passport.authenticate('github'), (req, res) => {
     res.status(200).json({
-        data: req.user
+        data:req.user
     });
 });
 
