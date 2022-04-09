@@ -2,7 +2,7 @@
 const Blog = require('../models/blog');
 const User = require('../models/user');
 
-const userBlogs = async (req, res) => {
+const viewUserBlogs = async (req, res) => {
     try {
         const currentUser = await User.findById(req.body.userId).populate('blogsCreated');
         if (!currentUser) {
@@ -29,3 +29,28 @@ const userBlogs = async (req, res) => {
         });
     }
 }
+
+const viewBlog = async (req, res) => {
+    try {
+        const blog = await Blog.findById(req.params.id).populate('author');
+        if (!blog) {
+            res.status(404).json({
+                message: 'Blog not found!'
+            });
+            return;
+        }
+
+        res.status(200).json({
+            data: blog
+        });
+    } catch (error) {
+        res.status(400).json({
+            message: error.message
+        });
+    }
+}
+
+module.exports = {
+    viewUserBlogs,
+    viewBlog
+};
