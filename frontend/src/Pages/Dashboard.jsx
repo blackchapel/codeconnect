@@ -15,7 +15,8 @@ import MailIcon from "@mui/icons-material/Mail";
 import { Button } from "@mui/material";
 import BlogCard from "../Components/BlogCard";
 import { Grid } from "@mui/material";
-import ChillSection from "../Pages/ChillSection"
+import ChillSection from "../Pages/ChillSection";
+import { GlobalStyles } from "@mui/material";
 const drawerWidth = 240;
 
 export default function Dashboard() {
@@ -27,99 +28,99 @@ export default function Dashboard() {
     setInbox(true);
   }, []);
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      <Box
+        sx={{ display: "flex", backgroundColor: "#16213E", margin: "0" }}
+        color="secondary"
       >
-        <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Clipped drawer
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          [`& .MuiDrawer-paper`]: {
+        <AppBar
+          position="fixed"
+          sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        >
+          <Toolbar>
+            <Typography variant="h6" noWrap component="div">
+              Clipped drawer
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          variant="permanent"
+          sx={{
             width: drawerWidth,
-            boxSizing: "border-box",
-          },
-        }}
-      >
-        <Toolbar />
-        <Box sx={{ overflow: "auto" }}>
-          <List>
-            {["Inbox", "Starred", "Chill Section", "Drafts"].map((t, index) => (
-              <ListItem button key={t} onClick={() => {
-                if (t === "Inbox") {
-                  setInbox(true);
-                  setStarr(false);
-                  setChill(false);
-                } else if (t === "Starred") {
-                  setInbox(false);
-                  setStarr(true);
-                  setChill(false);
-
-                }
-                else if (t === "Chill Section") {
-                  setInbox(false);
-                  setStarr(false);
-                  setChill(true);
-
-                }
-              }}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={t} />
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {["All mail", "Trash", "Spam"].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-      </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <Toolbar />
-        {inbox && (
-          <Grid
-            container
-            direction="row"
-            justifyContent="flex-start"
-            alignItems="flex-start"
-            spacing={2}
+            flexShrink: 0,
+            [`& .MuiDrawer-paper`]: {
+              width: drawerWidth,
+              boxSizing: "border-box",
+              borderWidth: 0,
+            },
+            backgroundColor: "#1A1A2E",
+          }}
+        >
+          <Toolbar sx={{ backgroundColor: "#1A1A2E" }} />
+          <Box
+            sx={{ overflow: "auto", backgroundColor: "#1A1A2E", height: "100%" }}
+            color="secondary"
           >
-            <Grid item>
-              <BlogCard />
+            <List color="secondary" sx={{ backgroundColor: "#1A1A2E" }}>
+              {["Inbox", "Starred", "Chill Section", "Drafts"].map(
+                (t, index) => (
+                  <ListItem
+                    color="secondary"
+                    button
+                    key={t}
+                    onClick={() => {
+                      if (t === "Inbox") {
+                        setInbox(true);
+                        setStarr(false);
+                        setChill(false);
+                      } else if (t === "Starred") {
+                        setInbox(false);
+                        setStarr(true);
+                        setChill(false);
+                      } else if (t === "Chill Section") {
+                        setInbox(false);
+                        setStarr(false);
+                        setChill(true);
+                      }
+                    }}
+                  >
+                    <ListItemIcon sx={{ color: "#E94560" }}>
+                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    </ListItemIcon>
+                    <ListItemText primary={t} sx={{ color: "white" }} />
+                  </ListItem>
+                )
+              )}
+            </List>
+          </Box>
+        </Drawer>
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <Toolbar />
+          {inbox && (
+            <Grid
+              container
+              direction="row"
+              justifyContent="center"
+              alignItems="flex-start"
+              spacing={2}
+            >
+              <Grid item>
+                <BlogCard />
+              </Grid>
+              <Grid item>
+                <BlogCard />
+              </Grid>
+              <Grid item>
+                <BlogCard />
+              </Grid>
+              <Grid item>
+                <BlogCard />
+              </Grid>
             </Grid>
-            <Grid item>
-              <BlogCard />
-            </Grid>
-            <Grid item>
-              <BlogCard />
-            </Grid>
-            <Grid item>
-              <BlogCard />
-            </Grid>
-          </Grid>
-        )}
-        {starr && <p>This is starred</p>}
+          )}
+          {starr && <p>This is starred</p>}
 
-        {chill && <ChillSection/>}
+          {chill && <ChillSection />}
+        </Box>
       </Box>
-    </Box>
   );
 }
