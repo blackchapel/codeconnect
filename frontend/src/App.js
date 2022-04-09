@@ -10,6 +10,7 @@ import { AnimatePresence } from "framer-motion";
 import Home from "./Pages/Home"
 import { useLocation } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard";
+import Landing from "./Pages/Landing"
 
 
 function App() {
@@ -39,7 +40,7 @@ function App() {
               <Route path="/dash" element={<Dashboard />}></Route>
               <Route path="/signup" element={<Signup />}></Route>
               <Route path="/home" element={<Home />}></Route>
-
+              <Route path="/" element={<Landing/>}></Route>
             </Routes>
         </AnimatePresence>
       </ThemeProvider>

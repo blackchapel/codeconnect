@@ -10,7 +10,6 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { textAlign } from "@mui/system";
 import Divider from "@mui/material/Divider";
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
@@ -27,6 +26,7 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function BlogCard() {
+  const blogData=JSON.parse( localStorage.getItem( 'user_blogs' ) );
   const navigate=useNavigate();
   const [expanded, setExpanded] = React.useState(false);
   const [flag, setFlag] = React.useState(true);
@@ -34,14 +34,8 @@ export default function BlogCard() {
     setFlag(!flag);
   };
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
-  const readBlog =()=>{
-    navigate('/blog/kglksmsm')
-  }
-
+console.log(blogData)
   return (
       <Card sx={{ maxWidth: 345, backgroundColor: "#1A1A2E", color: "white",borderRadius : 4}} >
         <CardHeader
@@ -73,7 +67,7 @@ export default function BlogCard() {
           <IconButton aria-label="add to favorites" sx={{color: "white"}} color={flag ? "primary" : "secondary"} onClick={handleClick}>
             <FavoriteIcon   />
           </IconButton>
-          <IconButton aria-label="read more" sx={{color: "white"}} onClick={readBlog}>
+          <IconButton aria-label="read more" sx={{color: "white"}}>
             <ReadMoreIcon />
           </IconButton>
         </CardActions>
