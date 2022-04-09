@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
+const Post = require('./post')
+const Blog = require('./blog');
 
 // Creating the schema
 const userSchema = new mongoose.Schema (
@@ -28,9 +30,20 @@ const userSchema = new mongoose.Schema (
             trim: true,
             minlength: [8, 'Password too short!'],
             maxlength: [128, 'Password too long!']
-        }
+        },
+
+        postsCreated: [{
+            type: [mongoose.Schema.Types.ObjectId],
+            ref: 'Post'
+        }],
+
+        blogsCreated: [{
+            type: [mongoose.Schema.Types.ObjectId],
+            ref: 'Blog'
+        }]
     },
-    { timestamps: true }
+    { timestamps: true },
+    { versionKey: false }
 );
 
 // Hashing the password
