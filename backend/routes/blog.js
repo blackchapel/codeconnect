@@ -15,8 +15,8 @@ const {
 const router = new express.Router();
 
 router.post('/create', passport.authenticate('github'), createBlog);
-router.get('/all', viewUserBlogs);
-router.get('/:id', viewBlog);
+router.get('/view/all', viewUserBlogs);
+router.get('/view/:id', viewBlog);
 router.get('/random', view10Blogs);
 
 // Exporting Modules
