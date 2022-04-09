@@ -14,8 +14,9 @@ const signup = async (req, res) => {
         res.status(201).json({
             message: 'Successfully signed up!',
             data: {
-                newUser
-            },
+                newUser,
+                token
+            }
         });
 
         res.redirect('http:localhost:3000/dash');
@@ -30,7 +31,7 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
     try {
         let user = await User.findOne({ email: req.body.email });
-        if(!user) {
+        if (!user) {
             res.status(404).json({
                 message: 'User not found!'
             });
@@ -38,7 +39,7 @@ const login = async (req, res) => {
         }
         
         const isMatch = await bcryptjs.compare(req.body.password, user.password);
-        if(!isMatch) {
+        if (!isMatch) {
             res.status(401).json({
                 message: 'Invalid credentials!'
             });
@@ -51,7 +52,8 @@ const login = async (req, res) => {
         res.status(200).json({
             message: 'User Verified!',
             data: { 
-                user
+                user,
+                token
             }
         });
     } catch (error) {
