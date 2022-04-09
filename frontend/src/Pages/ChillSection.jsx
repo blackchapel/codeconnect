@@ -8,16 +8,21 @@ const ChillSection = () => {
             <Box sx={{ m: 1 }}>
                 <Grid container spacing={2}>
                     <Grid item xs={8}>
-                        <Paper sx={{height : 500}}>
+                        <Paper sx={{ height: 500 }}>
                             1
                         </Paper>
                     </Grid>
                     <Grid item xs={4}>
                         <Spotify />
                     </Grid>
-                    <Grid item xs={12}>
-                        <Paper>2</Paper>
+                    <Grid item xs={8}>
+                        <Paper sx={{ height: "auto" }}>
+                            <CardSwiper></CardSwiper>
+                        </Paper>
                     </Grid>
+                </Grid>
+                <Grid container>
+
                 </Grid>
 
             </Box>
