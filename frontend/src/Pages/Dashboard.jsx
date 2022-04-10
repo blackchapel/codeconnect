@@ -19,18 +19,21 @@ import BlogFeed from "./BlogFeed";
 import StackOverflow from './StackOverflow';
 import {useState,useEffect} from 'react'
 import axios from 'axios'
-import Logo from '../Images/codeconnect_logo-transparent.png'
 import PostFeed from "./PostFeed";
+import UserContext from "../Context/UserContext";
+import { useContext } from "react";
+import Logo from '../Images/codeconnect_logo-transparent.png'
 const drawerWidth = 240;
 
-
 export default function Dashboard() {
+  const {usr, setUsr} = useContext(UserContext)
   const [blog, setBlog] = React.useState(false);
   const [post, setPost] = React.useState(false);
   const [chill, setChill] = React.useState(false);
   const [stack, setStack] = React.useState(false);
   React.useEffect(() => {
     setBlog(true);
+    console.log(usr);
   }, []);
 
   const [user,setUser]=useState()
@@ -38,10 +41,10 @@ export default function Dashboard() {
   const getUserData = async ()=>{
     const response = await axios.get('http://localhost:3001/api/auth/user/view')
     setUser(response.data)
-    
+    setUsr(response.data)
     return response.data;
   }
-  console.log(user);
+  console.log(usr);
 useEffect(()=>{ getUserData()},[])
   return (
     <Box
@@ -53,7 +56,7 @@ useEffect(()=>{ getUserData()},[])
         sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
       >
         <Toolbar>
-          <a href='/' style={{flexGrow : 1}}><image src="https://cdn.discordapp.com/attachments/959839537146769448/962396339902238770/codeconnect_logo-transparent.png" alt='LOGO' style={{flexGrow : 1}}/></a>
+          <img src={Logo} alt='LOGO' style={{flexGrow : 1, height: "70px", width: "2px"}}/>
         <Button variant="contained" startIcon={<LogoutIcon/>}color='secondary' >Logout</Button>
         </Toolbar>
       </AppBar>

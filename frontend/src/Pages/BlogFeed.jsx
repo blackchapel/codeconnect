@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Grid, Button, Modal, Backdrop, Box, TextField } from '@mui/material'
 import BlogCard from '../Components/BlogCard'
 import { FaEdit, FaInbox } from "react-icons/fa";
 import axios from 'axios';
+import { useContext} from 'react';
+import UserContext from "../Context/UserContext";
 const style = {
   position: "absolute",
   top: "50%",
@@ -16,12 +18,16 @@ const style = {
   borderRadius: 4,
 };
 
-
 function BlogFeed() {
+  const {usr} = useContext(UserContext)
+  // const axiosConfig = {
+  //   headers: {
+  //       "Access-Control-Allow-Origin": "*",
+  //   }
+  // };
   const [formData, setFormData] = React.useState({
     Heading: '',
     Content: '',
-    Author : JSON.parse( localStorage.getItem( 'user_id' ))
   })
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -29,14 +35,14 @@ function BlogFeed() {
   const onChange = (e) => {
 
     setFormData((prevState) => ({
-  
       ...prevState,
       [e.target.name]: e.target.value,
   
     }))
   }
   const handleSubmit = async (e) => {
-
+    
+    formData['Author'] = usr._id
     console.log(formData);
     e.preventDefault();
     const response = await axios.post('http://localhost:3001/api/blog/create',formData)
