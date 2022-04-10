@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Box, Paper, Typography, Image } from "@mui/material";
 import Spotify from "../Components/Spotify";
 import CardSwiper from "../Components/CardSwiper";
-
+import chill from '../Images/chillsection.jpg'
 const ChillSection = () => {
   return (
     <>
@@ -10,7 +10,7 @@ const ChillSection = () => {
         <Grid container spacing={2} rowSpacing={3}>
           <Grid item xs={12} sx={{borderRadius : 5}}>
             
-                <img alt="chill section" style={{borderRadius : 10, m : 1}} src="https://media.giphy.com/media/YGV1S4MpyywBbIfc4Y/giphy.gif" height="570px" width="100%"/>
+                <img alt="chill section" style={{borderRadius : 10, m : 1}} src={chill} height="530px" width="100%"/>
             
           </Grid>
           <Grid item xs={8}>

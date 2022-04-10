@@ -1,6 +1,10 @@
 import React from "react";
 import Video from "../Videos/pexels-cottonbro-9665235.mp4";
-
+import Vid1 from '../Videos/vid1.mp4'
+import Vid2 from '../Videos/vid4.mp4'
+import Vid3 from '../Videos/vid2 (1).mp4'
+import Vid5 from '../Videos/vid3 (2).mp4'
+import logo from '../Images/logo.png'
 import {
   AppBar,
   Typography,
@@ -13,15 +17,22 @@ import {
 import BlogCardSwiper from "../Components/BlogCardSwiper";
 import { useNavigate } from "react-router-dom";
 const style = {
-    position: "absolute",
-    width: "100%",
-    left: "50%",
-    top: "50%",
-    height: "230%",
-    objectFit: "cover",
-    transform: "translate(-50%,-50%)",
-    zIndex: "-1",
+  position: "absolute",
+  width: "100%",
+  left: "50%",
+  top: "50%",
+  height: "230%",
+  objectFit: "cover",
+  transform: "translate(-50%,-50%)",
+  zIndex: "-1",
 };
+
+const style2={
+  width: "100%",
+  left: "50%",
+  top: "50%",
+  height: "10%",
+}
 function Landing() {
   const navigate = useNavigate();
   return (
@@ -36,9 +47,7 @@ function Landing() {
       >
         <AppBar position="static" sx={{ boxShadow: 0 }}>
           <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              CodeConnect
-            </Typography>
+            <Typography sx={{flexGrow : 1}}>CodeConnect</Typography>
             <Button
               color="secondary"
               variant="outlined"
@@ -62,11 +71,26 @@ function Landing() {
         </AppBar>
         <Box sx={{ m: 2 }}>
           <Grid container spacing={2}>
-            <Grid item xs={8}>
-              <Paper sx={{ height: 250 }}>8</Paper>
+
+            <Grid item xs={3}>
+              <video autoPlay loop muted >
+                <source src={Vid1} type="video/mp4" />
+              </video>
             </Grid>
-            <Grid item xs={4}>
-              <Paper sx={{ height: 250, backgroundColor: "red" }}>4</Paper>
+            <Grid item xs={3}>
+            <video autoPlay loop muted >
+                <source src={Vid2} type="video/mp4" />
+              </video>
+            </Grid>
+            <Grid item xs={3}>
+            <video autoPlay loop muted >
+                <source src={Vid3} type="video/mp4" />
+              </video>
+            </Grid>
+            <Grid item xs={3}>
+            <video autoPlay loop muted >
+                <source src={Vid5} type="video/mp4" />
+              </video>
             </Grid>
             <Grid item xs={12}>
               <Paper sx={{ backgroundColor: "transparent", boxShadow: 0 }}>
