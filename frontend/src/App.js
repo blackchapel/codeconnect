@@ -7,11 +7,11 @@ import Spotify from "./Components/Spotify";
 import Gmeet from "./Components/Gmeet";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AnimatePresence } from "framer-motion";
-import Home from "./Pages/Home"
+import Home from "./Pages/Home";
 import { useLocation } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard";
-import Landing from "./Pages/Landing"
-
+import Landing from "./Pages/Landing";
+import { UserProvider } from "./Context/UserContext";
 
 function App() {
   const loc = useLocation();
@@ -32,18 +32,20 @@ function App() {
   });
   return (
     <>
-     {/* <Spotify />  */}
-      <ThemeProvider theme={theme}>
-        <AnimatePresence exitBeforeEnter>
+      {/* <Spotify />  */}
+        <ThemeProvider theme={theme}>
+        <UserProvider>
+          <AnimatePresence exitBeforeEnter>
             <Routes location={loc} key={loc.key}>
               <Route path="/login" element={<Login />}></Route>
               <Route path="/dash" element={<Dashboard />}></Route>
               <Route path="/signup" element={<Signup />}></Route>
               <Route path="/home" element={<Home />}></Route>
-              <Route path="/" element={<Landing/>}></Route>
+              <Route path="/" element={<Landing />}></Route>
             </Routes>
-        </AnimatePresence>
-      </ThemeProvider>
+          </AnimatePresence>
+        </UserProvider>
+        </ThemeProvider>
     </>
   );
 }
