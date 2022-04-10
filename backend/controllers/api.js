@@ -1,18 +1,19 @@
 const fetch = require('cross-fetch');
 
-const base = 'https://api.stackexchange.com';
-const pathURL1 = '/2.3/search/advanced?order=desc&sort=relevance&';
-const pathURL2 = 'q=javascript';
-const pathURL3 = '&site=stackoverflow'
+const stackExchange = async (req, res) => {
+    // Fetching questions
+    const base = 'https://api.stackexchange.com';
+    const pathURL1 = '/2.3/search/advanced?order=desc&sort=relevance&q=';
+    const pathURL2 = req.body.query;
+    const pathURL3 = '&site=stackoverflow';
 
-let questions = [];
-let filteredqns = [];
+    let questions = [];
+    let filteredqns = [];
 
-const stackExchangeQuestion = async () => {
     const url = base + pathURL1 + pathURL2 + pathURL3;
-    const response = await fetch(url);
+    const qnResponse = await fetch(url);
 
-    questions = await response.json();
+    questions = await qnResponse.json();
     const items = questions.items;
 
     const n = items.length;
@@ -22,27 +23,27 @@ const stackExchangeQuestion = async () => {
         let x = a.question_id;
         filteredqns.push(x);
     }
-    console.log(filteredqns);
-}
+    //console.log(filteredqns);
 
-const ids = filteredqns.join([separator = ';']);
+    const ids = filteredqns.join([separator = ';']);
+    console.log(ids);
 
-stackExchangeQuestion();
+    // Fetching answers to fetched questions
+    const ansURL1 = '/2.3/questions/';
+    const ansURL2 = ids;
+    const ansURL3 = '/answers?order=desc&sort=activity&site=stackoverflow&filter=!nKzQURF6Y5';
 
-const ansURL1 = '/2.3/questions/';
-const ansURL2 = '5767325';
-const ansURL3 = '/answers?order=desc&sort=activity&site=stackoverflow&filter=!nKzQURF6Y5';
+    let answers = [];
+    let filteredAnsBody = [];
+    let filteredAnsId = [];
 
-let answers = [];
-let filteredAnsBody = [];
-let filteredAnsId = [];
-
-const stackExchangeAnswer = async () => {
     const ansurl = base + ansURL1 + ansURL2 + ansURL3;
-    const response = await fetch(ansurl);
+    const ansResponse = await fetch(ansurl);
 
-    answers = await response.json();
+    answers = await ansResponse.json();
+    console.log(answers);
     const ansitems = answers.items;
+    console.log(ansitems);
 
     const m = ansitems.length;
 
@@ -54,7 +55,20 @@ const stackExchangeAnswer = async () => {
         filteredAnsId.push(z);
     }
     console.log(filteredAnsBody);
+
+    res.status(201).json({
+        data: { 
+            filteredAnsBody, 
+            filteredAnsId 
+        }
+    });
 }
 
-stackExchangeAnswer();
+module.exports = stackExchange;
+
+
+
+
+
+
 
