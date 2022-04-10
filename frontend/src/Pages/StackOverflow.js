@@ -5,20 +5,20 @@ const StackOverflow = () => {
     const [query,setQuery]=useState()
     const [answers,setAnswers] = useState()
     const [loading,setLoading] = useState(true)
-    const handleQuestion = async (req) => {
-        const response = await axios.post('http://localhost:3001/api/fetch/stackexchange',query)
-        const answer =response.data.data.filteredAnsBody
-        setAnswers(answer)
-        setLoading(false)   
-    }
+    // const handleQuestion = async () => {
+    //     const response = await axios.post('http://localhost:3001/api/fetch/stackexchange',query)
+    //     const answer =response.data.data.filteredAnsBody
+    //     setAnswers(answer)
+    //     setLoading(false)   
+    // }
 
-    useEffect(()=>{handleQuestion()})
+    // useEffect(()=>{handleQuestion()})
     console.log(query);
-    if(loading){
-        return(
-            <div>loading</div>
-        )
-    }
+    // if(loading){
+    //     return(
+    //         <div>loading</div>
+    //     )
+    // }
     return (
         <>  <Paper sx={{ p: 3 }}>
             <Typography variant="h4">Enter your question here</Typography>
@@ -34,20 +34,14 @@ const StackOverflow = () => {
                     onChange={(e)=>{setQuery(e.target.value)}}
                     ></TextField>
                 </Grid>
-                <Grid item xs={2}><Button onClick={handleQuestion}>Search</Button></Grid>
+                <Grid item xs={2}><Button>Search</Button></Grid>
             </Grid>
 
             
         </Paper>
 
             <Grid direction="column" container spacing={2} sx={{ my: 1 }}>
-                {answers.map((answer)=>(
-                    <Grid item>
-                    <Paper>
-                        {answer}
-                    </Paper>
-                </Grid>
-                ))}
+                
             </Grid>
         </>
     )
