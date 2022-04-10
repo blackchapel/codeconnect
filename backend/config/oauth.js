@@ -9,8 +9,13 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser(async (id, done) => {
-    const currentUser = await User.findById(id);
-    done(null, currentUser);
+	try {
+		await User.findById(id, (err, user) => {
+			done(err, user);
+		});
+	} catch (err) {
+		console.log(err);
+	}
 });
 
 passport.use(
@@ -19,6 +24,7 @@ passport.use(
     	clientSecret: process.env.GITHUB_CLIENT_SECRET,
     	callbackURL: "http://localhost:3001/api/auth/github/callback"
   	}, async (accessToken, refreshToken, profile, done) => {
+		  console.log(profile)
 		const currentUser = await User.findOne({ githubId: profile.id });
 		if (currentUser) {
 			 done(null, currentUser);

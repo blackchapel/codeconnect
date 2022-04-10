@@ -1,6 +1,8 @@
 // Importing modules
 const User = require('../models/user');
 const bcryptjs = require('bcryptjs');
+const passport = require('passport');
+const passportSetup = require('../config/oauth');
 
 // Signup
 const signup = async (req, res) => {
@@ -18,8 +20,6 @@ const signup = async (req, res) => {
                 token
             }
         });
-
-        res.redirect('http:localhost:3000/dash');
     } catch (error) {
         res.status(400).json({
             message: error.message
@@ -78,9 +78,28 @@ const logout = async (req, res) => {
     }
 };
 
+// Send user to frontend after OAuth
+const sendUser = (req, res) => {
+    const currentUser = req.app.get('user');
+    res.json(currentUser);
+};
+
+// OAuth Login
+const OAuthLogin = passport.authenticate('github', {
+    scope: ["profile"],
+});
+
+// OAuth Callback
+const OAuthCallback = passport.authenticate('github', {
+    failureRedirect: "http://localhost:3000/login"
+});
+
 // Exporting modules
 module.exports = {
     signup,
     login,
-    logout
+    logout,
+    sendUser,
+    OAuthLogin,
+    OAuthCallback
 };
