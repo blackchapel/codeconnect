@@ -7,10 +7,10 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 
 export default function RedditCard() {
   return (
-    <Card sx={{ width: 290, textAlign: "center" ,m : 2,boxShadow: "0" , backgroundColor: "#1A1A2E", color: "white"}}>
+    <Card sx={{ width: 260, textAlign: "center" ,m : 2,boxShadow: "0" , backgroundColor: "#1A1A2E", color: "white"}}>
         <CardMedia
           component="img"
-          height="250"
+          height="240"
           image="https://www.budgetbytes.com/wp-content/uploads/2013/07/Creamy-Tomato-Spinach-Pasta-close.jpg"
           alt="pasta"
 

@@ -10,14 +10,16 @@ import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import { Button } from "@mui/material";
 import LogoutIcon from '@mui/icons-material/Logout';
 import ChillSection from "../Pages/ChillSection";
 import Feed from "./BlogFeed";
 import {FaDoorOpen, FaInbox, FaPager, FaStackOverflow} from 'react-icons/fa'
 import BlogFeed from "./BlogFeed";
+import StackOverflow from './StackOverflow';
+import {useState,useEffect} from 'react'
+import axios from 'axios'
+import Logo from '../Images/codeconnect_logo-transparent.png'
 import PostFeed from "./PostFeed";
 const drawerWidth = 240;
 
@@ -30,6 +32,17 @@ export default function Dashboard() {
   React.useEffect(() => {
     setBlog(true);
   }, []);
+
+  const [user,setUser]=useState()
+
+  const getUserData = async ()=>{
+    const response = await axios.get('http://localhost:3001/api/auth/user/view')
+    setUser(response.data)
+    
+    return response.data;
+  }
+  console.log(user);
+useEffect(()=>{ getUserData()},[])
   return (
     <Box
       sx={{ display: "flex", backgroundColor: "#16213E", margin: "0" }}
@@ -40,9 +53,7 @@ export default function Dashboard() {
         sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap component="div" sx={{flexGrow : 1}}>
-            Clipped drawer
-          </Typography>
+          <a href='/' style={{flexGrow : 1}}><image src="https://cdn.discordapp.com/attachments/959839537146769448/962396339902238770/codeconnect_logo-transparent.png" alt='LOGO' style={{flexGrow : 1}}/></a>
         <Button variant="contained" startIcon={<LogoutIcon/>}color='secondary' >Logout</Button>
         </Toolbar>
       </AppBar>
@@ -55,7 +66,7 @@ export default function Dashboard() {
             width: drawerWidth,
             boxSizing: "border-box",
             borderWidth: 0,
-            height: "40%",
+            height: "100%",
           },
           backgroundColor: "#1A1A2E",
         }}
@@ -110,10 +121,10 @@ export default function Dashboard() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        {blog && (<BlogFeed />)}
+        {blog && (<BlogFeed blogs={user}/>)}
         {post && (<PostFeed />)}
         {chill && <ChillSection />}
-        {stack && <ChillSection />}
+        {stack && <StackOverflow />}
       </Box>
     </Box>
   );

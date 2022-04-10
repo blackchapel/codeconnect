@@ -7,13 +7,11 @@ const ChillSection = () => {
   return (
     <>
       <Box sx={{ m: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Paper
-              sx={{backgroundColor: "#1A1A2E", color: "white", borderRadius: "20px" }}
-            >
-                <img alt="chill section" src="https://media.giphy.com/media/YGV1S4MpyywBbIfc4Y/giphy.gif" height="570px" width="100%"/>
-            </Paper>
+        <Grid container spacing={2} rowSpacing={3}>
+          <Grid item xs={12} sx={{borderRadius : 5}}>
+            
+                <img alt="chill section" style={{borderRadius : 10, m : 1}} src="https://media.giphy.com/media/YGV1S4MpyywBbIfc4Y/giphy.gif" height="570px" width="100%"/>
+            
           </Grid>
           <Grid item xs={8}>
             <Paper
