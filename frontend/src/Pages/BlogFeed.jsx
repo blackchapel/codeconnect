@@ -132,6 +132,11 @@ function BlogFeed() {
                 <Grid item>
                   <BlogCard />
                 </Grid>
+                <Grid item>
+                  <BlogCard />
+                </Grid><Grid item>
+                  <BlogCard />
+                </Grid>
               </Grid>
             </Grid>
           </Grid>

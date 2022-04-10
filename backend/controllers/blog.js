@@ -4,6 +4,7 @@ const User = require('../models/user');
 
 const createBlog = async (req, res) => {
     try {
+        console.log(req.body);
         let newBlog = new Blog(req.body);
         newBlog.author = req.body.author;
         await newBlog.save();

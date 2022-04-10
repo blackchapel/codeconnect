@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import GlobalStyles from "@mui/material/GlobalStyles";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react"
+import {useNavigate} from 'react-router-dom'
 import axios from "axios"
 import Divider from "@mui/material/Divider";
 import Chip from "@mui/material/Chip";
@@ -24,6 +25,7 @@ export default function SignInSide() {
 
   })
 
+  const navigate = useNavigate()
   const getData = async () => {
     const userData = { name, email, password }
     const response = await axios.post('http://localhost:3001/api/auth/signup', userData)
@@ -52,6 +54,7 @@ export default function SignInSide() {
     console.log(formData);
     e.preventDefault()
     getData();
+    navigate('/dash')
   }
 
   useEffect(() => { getData() },[])
