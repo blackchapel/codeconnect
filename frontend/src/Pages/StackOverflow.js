@@ -2,11 +2,22 @@ import React, { useState, useEffect } from 'react'
 import { TextField, Typography, Paper, Grid, Button } from '@mui/material'
 import axios from 'axios'
 const StackOverflow = () => {
-    // const [query,setQuery]
-    const handleQuestion = (req) => {
-        const response = axios.post('http://localhost:3001/api/fetch/stackexchange',)
-        console.log(response)
-        
+    const [query,setQuery]=useState()
+    const [answers,setAnswers] = useState()
+    const [loading,setLoading] = useState(true)
+    const handleQuestion = async (req) => {
+        const response = await axios.post('http://localhost:3001/api/fetch/stackexchange',query)
+        const answer =response.data.data.filteredAnsBody
+        setAnswers(answer)
+        setLoading(false)   
+    }
+
+    useEffect(()=>{handleQuestion()})
+    console.log(query);
+    if(loading){
+        return(
+            <div>loading</div>
+        )
     }
     return (
         <>  <Paper sx={{ p: 3 }}>
@@ -20,21 +31,23 @@ const StackOverflow = () => {
                         color='secondary'
                         label="Question"
                         name="question"
-                    // onChange={onChange}
+                    onChange={(e)=>{setQuery(e.target.value)}}
                     ></TextField>
                 </Grid>
-                <grid item xs={2}><Button onClick={handleQuestion}>Search</Button></grid>
+                <Grid item xs={2}><Button onClick={handleQuestion}>Search</Button></Grid>
             </Grid>
 
             
         </Paper>
 
             <Grid direction="column" container spacing={2} sx={{ my: 1 }}>
-                <Grid item>
+                {answers.map((answer)=>(
+                    <Grid item>
                     <Paper>
-                        q
+                        {answer}
                     </Paper>
                 </Grid>
+                ))}
             </Grid>
         </>
     )
