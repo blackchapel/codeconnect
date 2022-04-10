@@ -22,6 +22,7 @@ import axios from 'axios'
 import PostFeed from "./PostFeed";
 import UserContext from "../Context/UserContext";
 import { useContext } from "react";
+import {useNavigate} from 'react-router-dom'
 import Logo from '../Images/codeconnect_logo-transparent.png'
 const drawerWidth = 240;
 
@@ -37,7 +38,7 @@ export default function Dashboard() {
   }, []);
 
   const [user,setUser]=useState()
-
+  const navigate=useNavigate()
   const getUserData = async ()=>{
     const response = await axios.get('http://localhost:3001/api/auth/user/view')
     setUser(response.data)
@@ -57,7 +58,7 @@ useEffect(()=>{ getUserData()},[])
       >
         <Toolbar>
         <h2 style={{flexGrow : 1, color: "#E94560"}}>CodeConnect</h2>
-        <Button variant="contained" startIcon={<LogoutIcon/>}color='secondary' >Logout</Button>
+        <Button variant="contained" startIcon={<LogoutIcon/>}color='secondary' onClick={() => {setUsr('');navigate('/');}}>Logout</Button>
         </Toolbar>
       </AppBar>
       <Drawer
