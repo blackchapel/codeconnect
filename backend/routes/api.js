@@ -5,7 +5,7 @@ const stackExchange = require('../controllers/api');
 // Initializing router
 const router = new express.Router();
 
-router.get('/stackexchange', stackExchange);
+router.post('/stackexchange', stackExchange);
 
 // Exporting Modules
 module.exports = router;
