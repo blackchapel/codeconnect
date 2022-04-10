@@ -56,7 +56,7 @@ useEffect(()=>{ getUserData()},[])
         sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
       >
         <Toolbar>
-          <img src={Logo} alt='LOGO' style={{flexGrow : 1, height: "70px", width: "2px"}}/>
+        <h2 style={{flexGrow : 1, color: "#E94560"}}>CodeConnect</h2>
         <Button variant="contained" startIcon={<LogoutIcon/>}color='secondary' >Logout</Button>
         </Toolbar>
       </AppBar>
