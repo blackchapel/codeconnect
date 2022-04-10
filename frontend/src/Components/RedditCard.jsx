@@ -11,13 +11,13 @@ export default function RedditCard() {
         <CardMedia
           component="img"
           height="240"
-          image="https://www.budgetbytes.com/wp-content/uploads/2013/07/Creamy-Tomato-Spinach-Pasta-close.jpg"
+          image="https://i.redd.it/ggi1d7gl5jq81.jpg"
           alt="pasta"
 
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Pasta
+          <Typography gutterBottom variant="body1" component="div">
+          My software never has bugs, it just develops unintended features
           </Typography>
         </CardContent>
     </Card>
