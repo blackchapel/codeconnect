@@ -26,7 +26,7 @@ export default function BasicCard() {
           Post Caption
         </Typography>
         <Typography variant="body2">
-         Post Content pspkkdfjslkj  ksdjfflskdjffl jsldkfjslk jlkwj welkjckk jksjdvld 
+         Descroption about your pproject and needed developers
         </Typography>
       </CardContent>
       <CardActions>
