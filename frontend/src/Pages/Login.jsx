@@ -85,7 +85,7 @@ export default function SignInSide() {
             borderTopLeftRadius: 15,
             borderBottomLeftRadius: 15,
             backgroundImage:
-              'url("https://i.pinimg.com/originals/38/a0/cc/38a0cc030a73b8592057bd7d01bfd56d.gif")',
+              'url("https://c.tenor.com/2uyENRmiUt0AAAAC/coding.gif")',
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"

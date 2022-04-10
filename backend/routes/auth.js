@@ -17,11 +17,17 @@ router.post('/login', login);
 router.put('/logout', verifyjwt, logout);
 
 router.get('/github', passport.authenticate('github', {
-    scope: ['profile']
+    scope: ['profile%20repo:status']
 }));
 
 router.get('/github/callback', passport.authenticate('github'), (req, res) => {
     res.redirect('http://localhost:3000/dash');
+});
+
+router.get('/user/view', passport.authenticate('github'), (req, res) => {
+    res.status(200).json({
+        data:req.user
+    });
 });
 
 // Exporting Modules
