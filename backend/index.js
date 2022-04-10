@@ -33,11 +33,13 @@ app.use(morgan('dev'));
 const auth = require('./routes/auth');
 const blog = require('./routes/blog');
 const post = require('./routes/post');
+const fetch = require('./routes/api');
 
 // Routes
 app.use('/api/auth', auth);
 app.use('/api/blog', blog);
 app.use('/api/post', post);
+app.use('/api/fetch', fetch);
 
 app.get('/api', (req, res) => {
     res.json({ message: "Hello from server!" });
