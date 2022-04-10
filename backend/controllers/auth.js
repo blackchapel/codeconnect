@@ -3,14 +3,15 @@ const User = require('../models/user');
 const bcryptjs = require('bcryptjs');
 const passport = require('passport');
 const passportSetup = require('../config/oauth');
+const { createToken, maxAge } = require('../config/jwt');
 
 // Signup
 const signup = async (req, res) => {
     try {
         let newUser = new User(req.body);
         await newUser.save();
-        const token = await User.generatejwt(newUser._id);
-        res.cookie('token', token, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 });
+        const token = createToken(user._id);
+        res.cookie('token', token, { httpOnly: true, maxAge: maxAge * 1000 });
 
         // Sending a response back
         res.status(201).json({
@@ -30,32 +31,18 @@ const signup = async (req, res) => {
 // Login
 const login = async (req, res) => {
     try {
-        let user = await User.findOne({ email: req.body.email });
-        if (!user) {
-            res.status(404).json({
-                message: 'User not found!'
-            });
-            return;
-        }
-        
-        const isMatch = await bcryptjs.compare(req.body.password, user.password);
-        if (!isMatch) {
-            res.status(401).json({
-                message: 'Invalid credentials!'
-            });
-            return;
-        }
-        
-        const token = await User.generatejwt(user._id);
-        res.cookie('token', token, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 });
+        const { email, password } = req.body;
+        const user = await User.login(email, password);
 
-        res.status(200).json({
-            message: 'User Verified!',
-            data: { 
-                user,
-                token
-            }
-        });
+        if (user.password) {
+            const token = createToken(user._id);
+            res.cookie('token', token, { httpOnly: true, maxAge: maxAge * 1000 });
+            res.status(200).json({ user, token });
+        } else if (user.googleId) {
+            res.json({ message: 'Use Google sign in' });
+        } else {
+            res.json({ user });
+        }
     } catch (error) {
         res.status(400).json({
             message: error.message
@@ -91,7 +78,7 @@ const OAuthLogin = passport.authenticate('github', {
 
 // OAuth Callback
 const OAuthCallback = passport.authenticate('github', {
-    failureRedirect: "http://localhost:3000/login"
+    failureRedirect: 'http://localhost:3000/login'
 });
 
 // Exporting modules

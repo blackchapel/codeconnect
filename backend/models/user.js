@@ -84,6 +84,30 @@ userSchema.statics.generatejwt = async (userid) => {
     return token;
 };
 
+// Static method to login user
+userSchema.statics.login = async function(email, password){
+    const user = await this.findOne({email});
+    if(user) {
+        if(user.password) {
+            const auth = await bcrypt.compare(password, user.password);
+            if (auth){
+                return user;
+            }
+            return {
+                success: false,
+                message: "Incorrect password"
+            } 
+        } 
+        if(user.githubId){
+            return user;
+        }
+    }
+    return {
+        success: false,
+        message: "Incorrect email"
+    }
+}
+
 const User = mongoose.model('User', userSchema);
 
 // Exporting the module
